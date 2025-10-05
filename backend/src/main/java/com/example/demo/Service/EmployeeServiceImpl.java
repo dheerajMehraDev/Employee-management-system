@@ -75,4 +75,22 @@ public class EmployeeServiceImpl implements EmployeeService {
        return
                ResponseEntity.ok(Boolean.TRUE);
     }
+
+    @Override
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByDepartmentId(Long id) {
+        return repository.findByDepartment_Id(id)
+                .stream()
+                .map(emp -> EmployeeMapper.toEmployeeDto(emp))
+                .map(dto -> ResponseEntity.ok(dto))
+                .toList();
+    }
+
+    @Override
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByRoleId(Long id) {
+        return repository.findByDepartment_Id(id)
+                .stream()
+                .map(role -> EmployeeMapper.toEmployeeDto(role))
+                .map(dto -> ResponseEntity.ok(dto))
+                .toList();
+    }
 }

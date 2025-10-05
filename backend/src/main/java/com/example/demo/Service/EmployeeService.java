@@ -18,4 +18,6 @@ public interface EmployeeService {
     public ResponseEntity<?> createEmployee( EmployeeDto employee);
     public ResponseEntity<?> updateEmployee( EmployeeDto employee,Long id);
     public ResponseEntity<?> deleteEmployee(Long id);
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByDepartmentId( Long id);
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByRoleId(Long id);
 }

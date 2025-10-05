@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Dto.DepartmentDto;
+import com.example.demo.Dto.EmployeeDto;
 import com.example.demo.Dto.RoleDto;
 import com.example.demo.Service.RoleServiceImpl;
 import jakarta.validation.Valid;
@@ -39,6 +40,11 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteRole(@PathVariable Long id){
         return roleService.deleteRole(id);
+    }
+    @GetMapping("/roleid/{id}")
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByRoleId(@PathVariable Long id)
+    {
+        return roleService.getEmployeeByRoleId(id);
     }
 
 }

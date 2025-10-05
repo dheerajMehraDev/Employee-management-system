@@ -1,9 +1,12 @@
 package com.example.demo.Service;
 
+import com.example.demo.Dto.EmployeeDto;
 import com.example.demo.Dto.RoleDto;
 import com.example.demo.Entity.Role;
 import com.example.demo.Exception.ResourceNotFoundException;
+import com.example.demo.Mapper.EmployeeMapper;
 import com.example.demo.Mapper.RoleMapper;
+import com.example.demo.Repository.EmployeeRepository;
 import com.example.demo.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleRepository repository;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @Override
     public ResponseEntity<?> createRole(RoleDto dto) {
@@ -50,4 +56,14 @@ public class RoleServiceImpl implements RoleService {
         repository.delete(role);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(Boolean.TRUE);
     }
+
+    @Override
+    public List<ResponseEntity<EmployeeDto>> getEmployeeByRoleId(Long id) {
+       return employeeRepository.findByRoles_Id(id)
+               .stream()
+               .map(emp -> EmployeeMapper.toEmployeeDto(emp))
+               .map(dto -> ResponseEntity.ok(dto))
+               .toList();
+    }
+
 }

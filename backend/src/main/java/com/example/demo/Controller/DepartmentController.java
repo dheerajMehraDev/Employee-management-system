@@ -38,4 +38,5 @@ public class DepartmentController {
     public ResponseEntity<Boolean> deleteDepartment(@PathVariable Long id){
         return departmentService.deleteDepartment(id);
     }
+
 }
